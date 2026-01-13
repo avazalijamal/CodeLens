@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="az">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Traffic Racer (Color Edition)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="hud">
+        <div class="pill">
+          Score: <b id="score">0</b> &nbsp; | &nbsp; Best:
+          <b id="best">0</b> &nbsp; | &nbsp; Coins: <b id="coins">0</b>
+        </div>
+        <button id="btn">Start</button>
+      </div>
+
+      <canvas id="game" width="360" height="600"></canvas>
+
+      <div class="hint">
+        İdarə: <span class="kbd">←</span> <span class="kbd">→</span> və ya
+        <span class="kbd">A</span>/<span class="kbd">D</span>. Mobil: ekrana
+        toxunub sağ/sol sürüşdür.
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

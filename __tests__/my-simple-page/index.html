@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="az">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sadə Səhifə</title>
+    <link rel="icon" href="assets/logo.svg" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="top">
+        <img class="logo" src="assets/logo.svg" alt="Logo" />
+        <h1>Salam 👋</h1>
+        <p class="sub">Sadə HTML + CSS + JS nümunəsi</p>
+      </header>
+
+      <section class="card" aria-label="Profil kartı">
+        <img class="avatar" src="assets/avatar.png" alt="Avatar" />
+        <div class="info">
+          <h2 id="name">Qonaq</h2>
+          <p id="status">Bugün əla gündür ✨</p>
+
+          <div class="row">
+            <input
+              id="nameInput"
+              type="text"
+              placeholder="Adını yaz..."
+              maxlength="20"
+            />
+            <button id="saveBtn" type="button">Yadda saxla</button>
+          </div>
+
+          <button id="toggleBtn" class="ghost" type="button">
+            Statusu dəyiş
+          </button>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <small>© <span id="year"></span> — sadə demo</small>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

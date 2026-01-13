@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — Səhifə tapılmadı</title>
+    <style>
+      :root {
+        --bg: #0b0d12;
+        --card: rgba(17, 21, 34, 0.72);
+        --border: rgba(255, 255, 255, 0.1);
+        --text: #e7eaf3;
+        --muted: #9aa3b2;
+        --accent: #5eead4;
+        --accent2: #6366f1;
+        --shadow: 0 18px 55px rgba(0, 0, 0, 0.45);
+        --radius: 22px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        color: var(--text);
+        background: radial-gradient(
+            1100px 520px at 18% 10%,
+            rgba(94, 234, 212, 0.12),
+            transparent 55%
+          ),
+          radial-gradient(
+            900px 520px at 88% 20%,
+            rgba(99, 102, 241, 0.16),
+            transparent 55%
+          ),
+          radial-gradient(
+            900px 520px at 50% 100%,
+            rgba(236, 72, 153, 0.08),
+            transparent 60%
+          ),
+          var(--bg);
+        display: grid;
+        place-items: center;
+        padding: 24px 16px;
+      }
+
+      .wrap {
+        width: min(980px, 100%);
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 16px;
+      }
+
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0.015)
+        );
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+      }
+
+      .left {
+        padding: 22px 22px 20px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 7px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.2px;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px rgba(94, 234, 212, 0.14);
+      }
+
+      h1 {
+        margin: 14px 0 6px;
+        font-size: clamp(34px, 6vw, 56px);
+        letter-spacing: 0.4px;
+        line-height: 1.05;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+        font-size: 14px;
+        max-width: 52ch;
+      }
+
+      .actions {
+        margin-top: 16px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        border: 1px solid rgba(94, 234, 212, 0.4);
+        background: linear-gradient(
+          180deg,
+          rgba(94, 234, 212, 0.18),
+          rgba(94, 234, 212, 0.08)
+        );
+        color: var(--text);
+        padding: 10px 14px;
+        border-radius: 14px;
+        font-weight: 900;
+        letter-spacing: 0.2px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.08s ease, filter 0.2s ease,
+          border-color 0.2s ease;
+        user-select: none;
+      }
+      .btn:hover {
+        filter: brightness(1.05);
+      }
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      .btnGhost {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+      }
+      .btnGhost:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .right {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .rightTop {
+        padding: 16px 16px 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(255, 255, 255, 0.02);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .miniTitle {
+        font-weight: 900;
+        font-size: 12.5px;
+        letter-spacing: 0.2px;
+      }
+      .pill {
+        font-size: 11px;
+        color: var(--muted);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.02);
+        padding: 4px 8px;
+        border-radius: 999px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .code {
+        padding: 14px 16px 16px;
+        background: rgba(12, 16, 28, 0.65);
+        font-size: 12.5px;
+        line-height: 1.55;
+        color: rgba(231, 234, 243, 0.95);
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .glow {
+        position: relative;
+      }
+      .glow::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: var(--radius);
+        pointer-events: none;
+        background: radial-gradient(
+            700px 260px at 15% 10%,
+            rgba(94, 234, 212, 0.18),
+            transparent 60%
+          ),
+          radial-gradient(
+            700px 260px at 85% 20%,
+            rgba(99, 102, 241, 0.18),
+            transparent 60%
+          );
+        opacity: 0.55;
+        filter: blur(12px);
+        z-index: -1;
+      }
+
+      .small {
+        margin-top: 12px;
+        font-size: 12px;
+        color: rgba(154, 163, 178, 0.9);
+      }
+
+      @media (max-width: 880px) {
+        .wrap {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="card left glow">
+        <div class="badge"><span class="dot"></span> ERROR • 404</div>
+        <h1>404</h1>
+        <p>
+          Axtardığın səhifə tapılmadı. Link səhv ola bilər, ya da səhifə silinib
+          / köçürülüb.
+        </p>
+
+        <div class="actions">
+          <a class="btn" href="/" aria-label="Ana səhifəyə qayıt">Ana səhifə</a>
+          <button
+            class="btn btnGhost"
+            onclick="history.back()"
+            aria-label="Geri qayıt"
+          >
+            Geri
+          </button>
+        </div>
+
+        <div class="small">
+          İpucu: URL-ni yoxla və ya yuxarıdakı düymələrdən istifadə et.
+        </div>
+      </div>
+
+      <div class="card right">
+        <div class="rightTop">
+          <div class="miniTitle">Debug məlumatı</div>
+          <div class="pill">location.pathname</div>
+        </div>
+        <div class="code" id="pathBox">Yüklənir...</div>
+      </div>
+    </div>
+
+    <script>
+      const box = document.getElementById("pathBox");
+      const path =
+        (location.pathname || "/") +
+        (location.search || "") +
+        (location.hash || "");
+      box.textContent = `Tapılmayan URL:
+${path}
+
+Zaman:
+${new Date().toLocaleString()}`;
+    </script>
+  </body>
+</html>

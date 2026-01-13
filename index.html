@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeLens Typing IDE (HTML/CSS/JS + Assets + Camera)</title>
+    <link rel="icon" href="./assets/icon.png" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="./lib/fontawesome-free-6.5.2-web/css/all.min.css"
+    />
+
+    <!-- Prism.js -->
+    <link href="./lib/prism/prism-tomorrow.min.css" rel="stylesheet" />
+    <script defer src="./lib/prism/prism.min.js"></script>
+    <script defer src="./lib/prism/prism-markup.min.js"></script>
+    <script defer src="./lib/prism/prism-css.min.js"></script>
+    <script defer src="./lib/prism/prism-javascript.min.js"></script>
+
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+
+  <body>
+    <!-- Camera bubble -->
+    <div class="camBubble" id="camBubble">
+      <video id="camVideo" autoplay playsinline muted></video>
+      <div class="camRing"></div>
+      <div class="camBadge"><span class="camDot"></span> Camera</div>
+    </div>
+
+    <!-- SETUP -->
+    <section id="setup">
+      <div class="setupCard">
+        <div class="setupHeader">
+          <div class="hLeft">
+            <div class="brandRow">
+              <span class="badgeDot"></span>
+              <span
+                >CodeLens Typing IDE — HTML / CSS / JS + Assets + Camera</span
+              >
+            </div>
+            <p class="subText">
+              Kodunu 3 hissəyə böl, assets fayllarını əlavə et, vaxtı seç.
+              İstəsən camera aç və aşağıda dairəvi görüntü görünsün.
+            </p>
+          </div>
+
+          <div class="hRight">
+            <div>
+              <label for="time">Vaxt (saniyə)</label>
+              <input id="time" type="number" min="1" value="30" />
+            </div>
+
+            <button class="btn btnGhost" id="cameraBtn" type="button">
+              <i class="fa-solid fa-camera"></i>
+              Kameranı aktiv et
+            </button>
+
+            <button class="btn" id="startBtn" type="button">Start</button>
+          </div>
+        </div>
+
+        <div class="setupBody">
+          <div class="grid">
+            <div class="card">
+              <div class="cardHeader">
+                <div>index.html</div>
+                <div class="chip">HTML</div>
+              </div>
+              <textarea
+                id="inHtml"
+                placeholder="Buraya HTML kodunu yapışdır..."
+              ></textarea>
+            </div>
+
+            <div class="card">
+              <div class="cardHeader">
+                <div>style.css</div>
+                <div class="chip">CSS</div>
+              </div>
+              <textarea
+                id="inCss"
+                placeholder="Buraya CSS kodunu yapışdır..."
+              ></textarea>
+            </div>
+
+            <div class="card">
+              <div class="cardHeader">
+                <div>app.js</div>
+                <div class="chip">JS</div>
+              </div>
+              <textarea
+                id="inJs"
+                placeholder="Buraya JavaScript kodunu yapışdır..."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="assetsRow">
+          <div class="assetBox" id="assetDrop">
+            <div class="assetTop">
+              <div class="assetTitle">
+                <i class="fa-solid fa-box-archive"></i> Assets
+              </div>
+              <div class="assetCount" id="assetCount">0 fayl</div>
+            </div>
+            <div class="assetHint">
+              Faylları buraya sürüşdür (drag & drop) və ya aşağıdan seç. Kodda
+              belə istifadə et: <b>assets/sekil.png</b>
+            </div>
+            <div class="assetInput">
+              <input type="file" id="assetInput" multiple />
+            </div>
+          </div>
+        </div>
+
+        <div class="setupFooter">
+          <div>
+            Tip: böyük kodlarda “Vaxt”ı artır (məs: 60–90s) — typing daha təbii
+            görünür.
+          </div>
+          <div>
+            Assets: sidebar-da görünür • Preview: soft transition • Camera: sol
+            aşağı
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IDE -->
+    <section id="ide">
+      <div class="ideWrap">
+        <aside class="sidebar">
+          <div class="sbTop">
+            <div class="brand"><span class="dot"></span> CodeLens</div>
+            <div class="sub">Mini IDE</div>
+          </div>
+
+          <div class="fileList" id="codeFiles">
+            <div class="file active" data-file="html">
+              <div class="ico ico-html"><i class="fa-brands fa-html5"></i></div>
+              <div class="meta">
+                <div class="fname">index.html</div>
+                <div class="hint">markup</div>
+              </div>
+            </div>
+
+            <div class="file" data-file="css">
+              <div class="ico ico-css">
+                <i class="fa-brands fa-css3-alt"></i>
+              </div>
+              <div class="meta">
+                <div class="fname">style.css</div>
+                <div class="hint">styles</div>
+              </div>
+            </div>
+
+            <div class="file" data-file="js">
+              <div class="ico ico-js"><i class="fa-brands fa-js"></i></div>
+              <div class="meta">
+                <div class="fname">app.js</div>
+                <div class="hint">logic</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ✅ Assets heç seçilməyibsə, JS bunu gizlədəcək -->
+          <div class="fileList" id="assetsList" style="display: none">
+            <div class="sectionLabel">
+              <i class="fa-solid fa-folder-open"></i> assets/
+            </div>
+          </div>
+        </aside>
+
+        <main class="main">
+          <div class="mainTop">
+            <div class="tabTitle">
+              <span id="activeFileName">index.html</span>
+              <span class="pill" id="activeLangPill">HTML</span>
+            </div>
+            <div class="progress" id="progressText">0%</div>
+          </div>
+
+          <div class="editorArea" id="editorArea">
+            <pre><code id="codeView" class="language-html"></code></pre>
+          </div>
+        </main>
+
+        <section class="preview">
+          <div class="previewTop">
+            <div>Preview</div>
+            <div id="previewStatus">—</div>
+          </div>
+          <div class="frames" id="frames"></div>
+        </section>
+      </div>
+    </section>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="./js/app.js"></script>
+  </body>
+</html>
